@@ -21,6 +21,25 @@ app.post("/todos", (req, res) => {
     .then(result => res.send(result))
     .catch(err => res.send(err));
 });
+app.get("/todos", (req, res) => {
+  Todo.find()
+    .then(result => {
+      res.send(result);
+    })
+    .catch(err => {
+      res.send(err);
+    });
+});
+app.post("/user", (req, res) => {
+  const newUser = new User({
+    firstname: req.body.firstname,
+    age: req.body.age
+  });
+  newUser
+    .save()
+    .then(result => res.send(result))
+    .catch(err => res.send(err));
+});
 
 //configuring the port
 app.listen(3000, () => {
